@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Amethyst</string>
+	<string>Blockys</string>
 	<key>CFBundleExecutable</key>
 	<string>AngelAuraAmethyst</string>
 	<key>CFBundleIcons</key>
@@ -74,30 +74,31 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>org.angelauramc.amethyst</string>
+	<string>com.blockys.ios</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>AngelAuraAmethyst</string>
+	<string>Blockys</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>org.angelauramc.amethyst.urlscheme</string>
+			<string>com.blockys.ios.urlscheme</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>amethyst</string>
+				<string>blockys</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1</string>
 	<key>GCSupportedGameControllers</key>
 	<array>
 		<dict>
@@ -128,9 +129,9 @@
 		<string>_altserver._tcp</string>
 	</array>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Angel Aura Amethyst uses the local network to find and communicate with AltServer and LAN servers.</string>
+	<string>Blockys uses the local network to find and communicate with AltServer and LAN servers.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Angel Aura Amethyst uses the microphone to enable support for voice chat mods.</string>
+	<string>Blockys uses the microphone to enable support for voice chat mods.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
