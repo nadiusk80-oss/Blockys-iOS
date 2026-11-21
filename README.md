@@ -1,7 +1,8 @@
 # Blockys (iOS)
 
 Blockys for iPhone and iPad runs Minecraft: Java Edition with Forge, Fabric,
-NeoForge, Quilt and OptiFine mods. It is a rebrand of
+NeoForge, Quilt and OptiFine mods. It is the iOS counterpart of Blockys Mobile
+for Android, and a rebrand of
 [Amethyst-iOS](https://github.com/AngelAuraMC/Amethyst-iOS) (GPL-3.0), which is
 based on [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher_iOS)
 and zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk).
@@ -12,7 +13,8 @@ Minecraft is a trademark of Mojang Studios.
 ## Downloads
 
 Every IPA is built by GitHub Actions on a macOS runner and published in
-[Releases](https://github.com/nadiusk80-oss/Blockys-iOS/releases):
+[Releases](https://github.com/nadiusk80-oss/Blockys-iOS/releases). The current
+release is 1.0.1:
 
 - `Blockys-iOS-<version>.ipa`: unsigned build for TrollStore, AltStore,
   SideStore or StikDebug. It includes the Java 8, 17, 21 and 25 runtimes.
