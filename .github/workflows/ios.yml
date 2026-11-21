@@ -1,0 +1,83 @@
+name: Blockys iOS build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'blockys-ios-v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build IPA
+    runs-on: macos-15
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install tools
+        run: |
+          brew install make ldid
+          echo "$(brew --prefix make)/libexec/gnubin" >> "$GITHUB_PATH"
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '8'
+
+      - name: Check toolchain
+        run: |
+          xcodebuild -version
+          gmake --version | head -1
+          ldid -v
+          cmake --version | head -1
+          "$JAVA_HOME/bin/javac" -version
+          xcrun --sdk iphoneos --show-sdk-path
+
+      - name: Build packages
+        env:
+          RUNNER: 0
+          BOOTJDK: ${{ env.JAVA_HOME }}/bin
+        run: |
+          gmake -j"$(sysctl -n hw.ncpu)" package PLATFORM=2
+          gmake -j"$(sysctl -n hw.ncpu)" package PLATFORM=2 TROLLSTORE_JIT_ENT=1
+
+      - name: Rename artifacts
+        run: |
+          cd artifacts
+          ls -lh
+          mv org.angelauramc.amethyst-1.0.0-ios.ipa Blockys-iOS-1.0.0.ipa
+          mv org.angelauramc.amethyst-1.0.0-ios-trollstore.tipa Blockys-iOS-1.0.0-trollstore.tipa
+          shasum -a 256 Blockys-iOS-1.0.0.ipa Blockys-iOS-1.0.0-trollstore.tipa > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Blockys-iOS
+          path: |
+            artifacts/Blockys-iOS-1.0.0.ipa
+            artifacts/Blockys-iOS-1.0.0-trollstore.tipa
+            artifacts/SHA256SUMS.txt
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/blockys-ios-v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" artifacts/Blockys-iOS-1.0.0.ipa artifacts/Blockys-iOS-1.0.0-trollstore.tipa artifacts/SHA256SUMS.txt --clobber
+          else
+            gh release create "$GITHUB_REF_NAME" \
+              artifacts/Blockys-iOS-1.0.0.ipa \
+              artifacts/Blockys-iOS-1.0.0-trollstore.tipa \
+              artifacts/SHA256SUMS.txt \
+              --title "Blockys iOS 1.0.0" \
+              --notes "Blockys for iPhone and iPad, based on Amethyst-iOS (GPL-3.0). Blockys-iOS-1.0.0.ipa is unsigned and installs with TrollStore, AltStore, SideStore or StikDebug. Blockys-iOS-1.0.0-trollstore.tipa adds the TrollStore JIT entitlement."
+          fi
