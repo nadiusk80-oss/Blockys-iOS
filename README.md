@@ -1,107 +1,78 @@
-# Angel Aura Amethyst (iOS)
-[![Development build](https://github.com/AngelAuraMC/Amethyst-iOS/actions/workflows/development.yml/badge.svg?branch=main)](https://github.com/AngelAuraMC/Amethyst-iOS/actions/workflows/development.yml)
-[![Crowdin](https://badges.crowdin.net/angelauramc/localized.svg)](https://crowdin.com/project/angelauramc)
-[![Discord](https://img.shields.io/discord/724163890803638273.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/5ptqkyZxEy)
+# Blockys (iOS)
 
+Blockys for iPhone and iPad runs Minecraft: Java Edition with Forge, Fabric,
+NeoForge, Quilt and OptiFine mods. It is a rebrand of
+[Amethyst-iOS](https://github.com/AngelAuraMC/Amethyst-iOS) (GPL-3.0), which is
+based on [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher_iOS)
+and zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk).
 
+Blockys is not affiliated with AngelAuraMC, PojavLauncherTeam or Mojang Studios.
+Minecraft is a trademark of Mojang Studios.
 
-## Introduction
-Amethyst is a Minecraft: Java Edition launcher for Android, iOS, and iPadOS, based off of zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk) project.
-* Supports most versions of Minecraft: Java Edition, from the very first beta to the newest snapshots.
-* Supports Forge, Fabric, OptiFine, and Quilt for you to customize the experience with supported mods.
-* Includes customizable on-screen controls, keyboard and mouse support, and game controller support.
-* Optimized for jailbroken and TrollStore devices to enable better capabilities.
-* Microsoft account and demo mode support for logging into Minecraft.
-* ...and much more!
+## Downloads
 
-This repository contains the code for our iOS and iPadOS port of Amethyst. Looking for [Android?](https://github.com/AngelAuraMC/Amethyst-Android)
+Every IPA is built by GitHub Actions on a macOS runner and published in
+[Releases](https://github.com/nadiusk80-oss/Blockys-iOS/releases):
 
-## Getting started with Amethyst
-The [Amethyst wiki](https://wiki.angelauramc.dev/wiki/getting_started/INSTALL.html#ios) has extensive documentation on how to install, set up, and play! For those who wish to install quickly, here's the basics:
+- `Blockys-iOS-<version>.ipa`: unsigned build for TrollStore, AltStore,
+  SideStore or StikDebug. It includes the Java 8, 17, 21 and 25 runtimes.
+- `Blockys-iOS-<version>-trollstore.tipa`: same build with the TrollStore JIT
+  entitlement already applied.
 
-### Requirements
-At the minimum, you'll need one of the following devices on **iOS 14.0** and later:
-- iPhone 6s and later
-- iPad (5th generation) and later
-- iPad Air (2nd generation) and later
-- iPad mini (4th generation) and later
-- iPad Pro (all models)
-- iPod touch (7th generation)
+`SHA256SUMS.txt` is published next to each asset.
 
-However, we recommend one of the following devices on **iOS 14.0** and later:
-- iPhone XS and later, excluding iPhone XR and iPhone SE (2nd generation)
-- iPad (10th generation) and later
-- iPad Air (4th generation) and later
-- iPad mini (6th generation) and later
-- iPad Pro (all models, except for 9.7-inch)
+## Requirements
 
-Recommended devices provide a smoother and more enjoyable gameplay experience compared to other supported devices.
-- iOS 17.x and iOS 18.x is supported. However, a computer is required. For more information, please check out [the official wiki](https://wiki.angelauramc.dev/wiki/faq/ios/JIT.html#what-are-the-methods-to-enable-jit)
+- iOS 14.0 or later on an arm64 device: iPhone 6s and later, iPad (5th
+  generation) and later, iPad Air 2 and later, iPad mini 4 and later, or any
+  iPad Pro.
+- JIT enabled. Minecraft Java needs just-in-time compilation; without it the
+  game is unusably slow.
+- About 2 GB free storage for the app, the Java runtimes and game files.
 
-### Setting up to sideload
-Amethyst can be sideloaded in many ways. Our recommended solution is to install [TrollStore](https://github.com/opa334/TrollStore) if your iOS version supports it. Installing with TrollStore allows you to permanently sign the application, automatically enable JIT, and increase memory limits.
+Tested device tiers and the JIT options are documented upstream:
+[TrollStore](https://github.com/opa334/TrollStore) permanently signs the app
+and enables JIT on the iOS versions it supports. On iOS 17.4 and later,
+AltStore, SideStore or StikDebug enable JIT with a computer.
 
-If you cannot, [AltStore](https://altstore.io) and [SideStore](https://sidestore.io) are your next best options.
-- Signing services that do not use your UDID (and use distribution certificates) are not supported, as Amethyst requires capabilities they do not allow. However, if you do managed to gain access to a Development certificate, due to it having the necessary entitlement (being com.apple.security.get-task-allow) to attach a debugger to the running process (enabling JIT), you may use a Development certificate.
-  
-- Only install sideloading software and Amethyst from trusted sources. We are not responsible for any harm caused by using unofficial software.
-- Jailbreaks also benefit from permenant signing, autoJIT, and increased memory limits. However, we do not recommend them on devices intended for regular use.
+**Known limitation:** upstream Amethyst does not support iOS 26 or later,
+because Apple removed the JIT paths the launcher relies on. iOS 14 to 18 is
+the supported range.
 
-### Installing Amethyst
-#### Release build (TrollStore)
-1. Download an IPA of Amethyst in [Releases](https://github.com/AngelAuraMC/Amethyst-iOS/releases).
-2. Open the package in TrollStore using the share menu.
+## Installing
 
-#### Release build (AltStore/SideStore trusted source)
-These builds will be available soon, stay tuned.
+1. Download `Blockys-iOS-<version>.ipa` (or the `.tipa` for TrollStore).
+2. Open it with TrollStore, AltStore, SideStore or StikDebug and confirm the
+   install.
+3. Enable JIT for Blockys before launching.
+4. Open Blockys, sign in with a Microsoft account that owns Minecraft Java
+   Edition, or use demo mode.
+5. Pick a Minecraft version and loader, then press play. The first launch
+   downloads the game files.
 
-#### Nightly builds
-*These builds can contain game-breaking bugs. Use with caution.*
-1. Download an IPA build of Amethyst in the [Actions tab](https://github.com/AngelAuraMC/Amethyst-iOS/actions).
-2. Open the downloaded IPA in your sideloading app to install.
+## Building
 
-#### Nightly builds (AltStore/SideStore trusted sources)
-These builds will be available soon, stay tuned.
+The build needs macOS with Xcode, CMake, GNU make, JDK 8 and
+[ldid](https://github.com/ProcursusTeam/ldid). The GitHub workflow
+`.github/workflows/ios.yml` installs everything and runs:
 
-### Enabling JIT
-Amethyst makes use of **just-in-time compilation**, or JIT, to provide usable speeds for the end user. JIT is not supported on iOS without the application being debugged, so workarounds are required to enable it. You can use this chart to determine the best solution for you and your setup.
-| Application         | AltStore | SideStore | StikDebug | TrollStore | Jitterbug          | Jailbroken |
-|---------------------|----------|-----------|-----------|------------|--------------------|------------|
-| Requires ext-device | Yes      | Yes (#)   | Yes (#)   | No         | If VPN unavailable | No         |
-| Requires Wi-Fi      | Yes      | Yes (#)   | Yes (#)   | No         | Yes                | No         |
-| Auto enabled        | Yes (*)  | No        | Yes       | Yes        | No                 | Yes        |
+```sh
+git submodule update --init --recursive
+BOOTJDK="$(/usr/libexec/java_home -v 1.8)/bin" \
+  gmake -j"$(sysctl -n hw.ncpu)" package PLATFORM=2
+```
 
-(*) AltServer running on the local network is required.
-(#) Only the first time.
+The Java runtimes are downloaded from the Amethyst asset server at build time.
+The resulting IPA is unsigned.
 
-## Contributors
-Amethyst is amazing, and surprisingly stable, and it wouldn't be this way without the commmunity that helped and contribute to the project! Some notable names:
+## What is different from Amethyst
 
-@crystall1nedev - Project manager, iOS port developer  
-@khanhduytran0 - iOS port developer  
-@artdeell  
-@Mathius-Boulay  
-@zhuowei  
-@jkcoxson   
-@Diatrus 
+See [NOTICE.md](NOTICE.md). In short: name, icon, bundle identifier
+(`com.blockys.ios`), interface strings and the changelog link. The launcher
+logic is unchanged.
 
-## Third party components and their licenses
-- [Caciocavallo](https://github.com/PojavLauncherTeam/caciocavallo): [GNU GPLv2 License](https://github.com/PojavLauncherTeam/caciocavallo/blob/master/LICENSE).
-- [jsr305](https://code.google.com/p/jsr-305): [3-Clause BSD License](http://opensource.org/licenses/BSD-3-Clause).
-- [Boardwalk](https://github.com/zhuowei/Boardwalk): [Apache 2.0 License](https://github.com/zhuowei/Boardwalk/blob/master/LICENSE) 
-- [GL4ES](https://github.com/ptitSeb/gl4es) by @lunixbochs @ptitSeb: [MIT License](https://github.com/ptitSeb/gl4es/blob/master/LICENSE).
-- [Mesa 3D Graphics Library](https://gitlab.freedesktop.org/mesa/mesa): [MIT License](https://docs.mesa3d.org/license.html).
-- [MetalANGLE](https://github.com/khanhduytran0/metalangle) by @kakashidinho and ANGLE team: [BSD 2.0 License](https://github.com/kakashidinho/metalangle/blob/master/LICENSE).
-- [MoltenVK](https://github.com/KhronosGroup/MoltenVK): [Apache 2.0 License](https://github.com/KhronosGroup/MoltenVK/blob/master/LICENSE).
-- [openal-soft](https://github.com/kcat/openal-soft): [LGPLv2 License](https://github.com/kcat/openal-soft/blob/master/COPYING).
-- [Azul Zulu JDK](https://www.azul.com/downloads/?package=jdk): [GNU GPLv2 License](https://openjdk.java.net/legal/gplv2+ce.html).
-- [LWJGL3](https://github.com/PojavLauncherTeam/lwjgl3): [BSD-3 License](https://github.com/LWJGL/lwjgl3/blob/master/LICENSE.md).
-- [LWJGLX](https://github.com/PojavLauncherTeam/lwjglx) (LWJGL2 API compatibility layer for LWJGL3): unknown license.
-- [DBNumberedSlider](https://github.com/khanhduytran0/DBNumberedSlider): [Apache 2.0 License](https://github.com/immago/DBNumberedSlider/blob/master/LICENSE)
-- [fishhook](https://github.com/khanhduytran0/fishhook): [BSD-3 License](https://github.com/facebook/fishhook/blob/main/LICENSE).
-- [shaderc](https://github.com/khanhduytran0/shaderc) (used by Vulkan rendering mods): [Apache 2.0 License](https://github.com/google/shaderc/blob/main/LICENSE).
-- [NRFileManager](https://github.com/mozilla-mobile/firefox-ios/tree/b2f89ac40835c5988a1a3eb642982544e00f0f90/ThirdParty/NRFileManager): [MPL-2.0 License](https://www.mozilla.org/en-US/MPL/2.0)
-- [AltKit](https://github.com/rileytestut/AltKit)
-- [UnzipKit](https://github.com/abbeycode/UnzipKit): [BSD-2 License](https://github.com/abbeycode/UnzipKit/blob/master/LICENSE).
-- [DyldDeNeuralyzer](https://github.com/xpn/DyldDeNeuralyzer): bypasses Library Validation for loading external runtime
-- Thanks to [MCHeads](https://mc-heads.net) for providing Minecraft avatars.
+## License
+
+GNU General Public License v3.0, the same license as Amethyst-iOS. See
+[LICENSE](LICENSE). The full corresponding source for every release is this
+repository at the release tag.
