@@ -35,7 +35,7 @@ jobs:
         run: |
           xcodebuild -version
           gmake --version | head -1
-          ldid -v
+          ldid -v || true
           cmake --version | head -1
           "$JAVA_HOME/bin/javac" -version
           xcrun --sdk iphoneos --show-sdk-path
@@ -43,8 +43,8 @@ jobs:
       - name: Build packages
         env:
           RUNNER: 0
-          BOOTJDK: ${{ env.JAVA_HOME }}/bin
         run: |
+          export BOOTJDK="$JAVA_HOME/bin"
           gmake -j"$(sysctl -n hw.ncpu)" package PLATFORM=2
           gmake -j"$(sysctl -n hw.ncpu)" package PLATFORM=2 TROLLSTORE_JIT_ENT=1
 
