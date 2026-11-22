@@ -7,6 +7,10 @@ for Android, and a rebrand of
 based on [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher_iOS)
 and zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk).
 
+Like Blockys Mobile 2.0.4, it also works without a Microsoft account: create a
+local account, pick a version and loader, and the game files download and
+launch with it.
+
 Blockys is not affiliated with AngelAuraMC, PojavLauncherTeam or Mojang Studios.
 Minecraft is a trademark of Mojang Studios.
 
@@ -14,7 +18,7 @@ Minecraft is a trademark of Mojang Studios.
 
 Every IPA is built by GitHub Actions on a macOS runner and published in
 [Releases](https://github.com/nadiusk80-oss/Blockys-iOS/releases). The current
-release is 1.0.1:
+release is 1.0.2:
 
 - `Blockys-iOS-<version>.ipa`: unsigned build for TrollStore, AltStore,
   SideStore or StikDebug. It includes the Java 8, 17, 21 and 25 runtimes.
@@ -47,8 +51,8 @@ the supported range.
 2. Open it with TrollStore, AltStore, SideStore or StikDebug and confirm the
    install.
 3. Enable JIT for Blockys before launching.
-4. Open Blockys, sign in with a Microsoft account that owns Minecraft Java
-   Edition, or use demo mode.
+4. Open Blockys and add an account: a Microsoft account that owns Minecraft
+   Java Edition, a local account (no Microsoft login needed), or demo mode.
 5. Pick a Minecraft version and loader, then press play. The first launch
    downloads the game files.
 
@@ -70,8 +74,9 @@ The resulting IPA is unsigned.
 ## What is different from Amethyst
 
 See [NOTICE.md](NOTICE.md). In short: name, icon, bundle identifier
-(`com.blockys.ios`), interface strings and the changelog link. The launcher
-logic is unchanged.
+(`com.blockys.ios`), interface strings, the changelog link, the build fixes and
+one behavior change: local accounts can install and play Minecraft, the same
+rule as Blockys Mobile 2.0.4.
 
 ## License
 

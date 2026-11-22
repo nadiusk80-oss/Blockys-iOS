@@ -6,7 +6,7 @@ on:
       release_tag:
         description: 'Release tag that receives the assets (empty skips publishing)'
         required: false
-        default: 'blockys-ios-v1.0.1'
+        default: 'blockys-ios-v1.0.2'
   push:
     tags:
       - 'blockys-ios-v*'
@@ -57,9 +57,9 @@ jobs:
         run: |
           cd artifacts
           ls -lh
-          mv org.angelauramc.amethyst-1.0.1-ios.ipa Blockys-iOS-1.0.1.ipa
-          mv org.angelauramc.amethyst-1.0.1-ios-trollstore.tipa Blockys-iOS-1.0.1-trollstore.tipa
-          shasum -a 256 Blockys-iOS-1.0.1.ipa Blockys-iOS-1.0.1-trollstore.tipa > SHA256SUMS.txt
+          mv org.angelauramc.amethyst-1.0.2-ios.ipa Blockys-iOS-1.0.2.ipa
+          mv org.angelauramc.amethyst-1.0.2-ios-trollstore.tipa Blockys-iOS-1.0.2-trollstore.tipa
+          shasum -a 256 Blockys-iOS-1.0.2.ipa Blockys-iOS-1.0.2-trollstore.tipa > SHA256SUMS.txt
           cat SHA256SUMS.txt
 
       - name: Upload artifacts
@@ -67,8 +67,8 @@ jobs:
         with:
           name: Blockys-iOS
           path: |
-            artifacts/Blockys-iOS-1.0.1.ipa
-            artifacts/Blockys-iOS-1.0.1-trollstore.tipa
+            artifacts/Blockys-iOS-1.0.2.ipa
+            artifacts/Blockys-iOS-1.0.2-trollstore.tipa
             artifacts/SHA256SUMS.txt
 
       - name: Publish release
@@ -81,12 +81,12 @@ jobs:
             exit 0
           fi
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
-            gh release upload "$RELEASE_TAG" artifacts/Blockys-iOS-1.0.1.ipa artifacts/Blockys-iOS-1.0.1-trollstore.tipa artifacts/SHA256SUMS.txt --clobber
+            gh release upload "$RELEASE_TAG" artifacts/Blockys-iOS-1.0.2.ipa artifacts/Blockys-iOS-1.0.2-trollstore.tipa artifacts/SHA256SUMS.txt --clobber
           else
             gh release create "$RELEASE_TAG" \
-              artifacts/Blockys-iOS-1.0.1.ipa \
-              artifacts/Blockys-iOS-1.0.1-trollstore.tipa \
+              artifacts/Blockys-iOS-1.0.2.ipa \
+              artifacts/Blockys-iOS-1.0.2-trollstore.tipa \
               artifacts/SHA256SUMS.txt \
-              --title "Blockys iOS 1.0.1" \
-              --notes "Blockys for iPhone and iPad, based on Amethyst-iOS (GPL-3.0). Blockys-iOS-1.0.1.ipa is unsigned and installs with TrollStore, AltStore, SideStore or StikDebug. Blockys-iOS-1.0.1-trollstore.tipa adds the TrollStore JIT entitlement."
+              --title "Blockys iOS 1.0.2" \
+              --notes "Blockys for iPhone and iPad, based on Amethyst-iOS (GPL-3.0). Local (offline) accounts can create profiles and install Minecraft, as in Blockys Mobile 2.0.4. Blockys-iOS-1.0.2.ipa is unsigned and installs with TrollStore, AltStore, SideStore or StikDebug. Blockys-iOS-1.0.2-trollstore.tipa adds the TrollStore JIT entitlement."
           fi
