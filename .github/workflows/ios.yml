@@ -31,6 +31,16 @@ jobs:
           cd Natives/external/MobileGlues
           git fetch --depth=1 https://github.com/ryanmurf/MobileGlues d4ba2dfb3de181a63d27c93a94be6bf74e11fc6c
           git checkout --detach d4ba2dfb3de181a63d27c93a94be6bf74e11fc6c
+          # That commit moved the sources to MobileGlues-cpp/; the submodule pins
+          # from the umbrella checkout still use the old src/main/cpp/ layout, so
+          # the new 3rdparty gitlinks must be initialized or cmake fails.
+          git submodule sync --recursive
+          git submodule update --init --recursive -- \
+            MobileGlues-cpp/3rdparty/glslang \
+            MobileGlues-cpp/3rdparty/SPIRV-Cross \
+            MobileGlues-cpp/3rdparty/glm \
+            MobileGlues-cpp/3rdparty/xxhash \
+            MobileGlues-cpp/include/FastSTL
           cd "$GITHUB_WORKSPACE"
           mkdir -p JavaApp/libs/lwjgl-3.3.3 JavaApp/libs/lwjgl-3.4.1
           mkdir -p Natives/resources/Frameworks/lwjgl33 Natives/resources/Frameworks/lwjgl34
