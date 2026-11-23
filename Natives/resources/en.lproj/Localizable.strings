@@ -199,7 +199,7 @@
 "preference.title.fullscreen_airplay" = "Fullscreen AirPlay";
 "preference.detail.fullscreen_airplay" = "Allows presenting fullscreen game window on the external display rather than mirroring everything on screen.";
 "preference.title.silence_other_audio" = "Pause audio when game opens";
-"preference.detail.silence_other_audio" = "Enable to allow Amethyst to pause audio from other apps, such as Music, when launching the game.";
+"preference.detail.silence_other_audio" = "Enable to allow Blockys to pause audio from other apps, such as Music, when launching the game.";
 "preference.title.silence_with_switch" = "Disable audio with silent switch";
 "preference.detail.silence_with_switch" = "Enable to disable audio when Silent Mode is on. Headphones and external speakers are not affected.";
 "preference.title.allow_microphone" = "Allow microphone input";
