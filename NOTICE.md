@@ -44,3 +44,24 @@ launch code are unchanged.
 
 The upstream license, copyright notices and third-party components are
 unchanged.
+
+## Changes made on 2026-11-23 and 2026-11-24
+
+Blockys iOS 1.0.3 added Minecraft 26.x (Java 25) launch support, and Blockys iOS
+2.0.7 aligns the version number with Blockys Mobile 2.0.7.
+
+- `Natives/JavaLauncher.m`: picks `lwjgl-3.4.1` from the launch target's
+  `lwjglVersion` (falling back to the Minecraft version id), so 26.x runs with
+  LWJGL 3.4.1 while older versions keep 3.3.3, and installs the Java 25 runtime
+  when the version declares it. The Mach exception headers are included
+  explicitly so the file builds with the current iOS SDK.
+- `Natives/Info.plist`, `Natives/PLPreferences.m`, `Natives/LauncherPreferences.m`,
+  `Natives/MinecraftResourceUtils.m`, `Natives/TrackedTextField.m`,
+  `Natives/input_bridge_v3.m` and `Natives/resources/en.lproj/Localizable.strings`:
+  the 26.x updates and line-ending normalization; content changes are the version
+  strings and interface labels only.
+- `.github/workflows/ios.yml`: downloads the LWJGL 3.4.1 jars and dylibs and pins
+  the MobileGlues submodule to the upstream revision these builds use.
+- `Makefile`, `Natives/Info.plist` and the workflow asset names: version `2.0.7`,
+  build `20000007`. The SDL repairs in Blockys Mobile 2.0.7 target Android's SDL
+  layer and do not apply here, because Blockys iOS does not include SDL.

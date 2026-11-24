@@ -7,7 +7,7 @@ for Android, and a rebrand of
 based on [PojavLauncher](https://github.com/PojavLauncherTeam/PojavLauncher_iOS)
 and zhuowei's [Boardwalk](https://github.com/zhuowei/Boardwalk).
 
-Like Blockys Mobile 2.0.4, it also works without a Microsoft account: create a
+Like Blockys Mobile, it also works without a Microsoft account: create a
 local account, pick a version and loader, and the game files download and
 launch with it.
 
@@ -18,7 +18,7 @@ Minecraft is a trademark of Mojang Studios.
 
 Every IPA is built by GitHub Actions on a macOS runner and published in
 [Releases](https://github.com/nadiusk80-oss/Blockys-iOS/releases). The current
-release is 1.0.2:
+release is 2.0.7:
 
 - `Blockys-iOS-<version>.ipa`: unsigned build for TrollStore, AltStore,
   SideStore or StikDebug. It includes the Java 8, 17, 21 and 25 runtimes.
@@ -76,7 +76,10 @@ The resulting IPA is unsigned.
 See [NOTICE.md](NOTICE.md). In short: name, icon, bundle identifier
 (`com.blockys.ios`), interface strings, the changelog link, the build fixes and
 one behavior change: local accounts can install and play Minecraft, the same
-rule as Blockys Mobile 2.0.4.
+rule as Blockys Mobile. Blockys iOS 1.0.3 added Minecraft 26.x support
+(LWJGL 3.4.1 and Java 25), and 2.0.7 aligns the version number with Blockys
+Mobile 2.0.7; the SDL repairs in that release are Android-only and have no iOS
+counterpart.
 
 ## License
 
