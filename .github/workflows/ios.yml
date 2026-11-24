@@ -112,6 +112,7 @@ jobs:
             - Same launcher behavior as 1.0.3: Minecraft 26.3 and 26.4-snapshot (Java 25) launch with LWJGL 3.4.1, Java 25 is installed when a version asks for it, and the game options keep fullscreen off so the window fits the device.
             - Local (offline) accounts keep working: create a profile, install Minecraft and play without a Microsoft account.
             - Blockys-iOS-1.0.4.ipa is unsigned and installs with TrollStore, AltStore, SideStore or StikDebug. Blockys-iOS-1.0.4-trollstore.tipa adds the TrollStore JIT entitlement.
+
             Based on Amethyst-iOS (GPL-3.0). Not affiliated with AngelAuraMC, PojavLauncher or Mojang.
         run: |
           if [ -z "$RELEASE_TAG" ]; then
