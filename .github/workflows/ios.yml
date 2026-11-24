@@ -6,7 +6,7 @@ on:
       release_tag:
         description: 'Release tag that receives the assets (empty skips publishing)'
         required: false
-        default: 'blockys-ios-v2.0.7'
+        default: 'blockys-ios-v1.0.4'
   push:
     tags:
       - 'blockys-ios-v*'
@@ -87,9 +87,9 @@ jobs:
         run: |
           cd artifacts
           ls -lh
-          mv org.angelauramc.amethyst-2.0.7-ios.ipa Blockys-iOS-2.0.7.ipa
-          mv org.angelauramc.amethyst-2.0.7-ios-trollstore.tipa Blockys-iOS-2.0.7-trollstore.tipa
-          shasum -a 256 Blockys-iOS-2.0.7.ipa Blockys-iOS-2.0.7-trollstore.tipa > SHA256SUMS.txt
+          mv org.angelauramc.amethyst-1.0.4-ios.ipa Blockys-iOS-1.0.4.ipa
+          mv org.angelauramc.amethyst-1.0.4-ios-trollstore.tipa Blockys-iOS-1.0.4-trollstore.tipa
+          shasum -a 256 Blockys-iOS-1.0.4.ipa Blockys-iOS-1.0.4-trollstore.tipa > SHA256SUMS.txt
           cat SHA256SUMS.txt
 
       - name: Upload artifacts
@@ -97,8 +97,8 @@ jobs:
         with:
           name: Blockys-iOS
           path: |
-            artifacts/Blockys-iOS-2.0.7.ipa
-            artifacts/Blockys-iOS-2.0.7-trollstore.tipa
+            artifacts/Blockys-iOS-1.0.4.ipa
+            artifacts/Blockys-iOS-1.0.4-trollstore.tipa
             artifacts/SHA256SUMS.txt
 
       - name: Publish release
@@ -106,13 +106,12 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ github.event_name == 'push' && github.ref_type == 'tag' && github.ref_name || inputs.release_tag }}
           RELEASE_NOTES: |
-            ## Blockys iOS 2.0.7
+            ## Blockys iOS 1.0.4
 
-            - Version numbering now matches Blockys Mobile 2.0.7. The Mobile 2.0.7 repair is Android-only code: it hooks SDL to retry the EGL load and to reuse the single window Android allows when the game falls back to OpenGL. Blockys iOS does not ship SDL, so there is nothing to port from that fix.
-            - Everything that repair builds on was already in Blockys iOS 1.0.3: Minecraft 26.3 and 26.4-snapshot (Java 25) launch with LWJGL 3.4.1, the launcher installs Java 25 when a version asks for it, and the game options keep fullscreen off so the window fits the device.
+            - The iOS app keeps its own numbering, so this release is 1.0.4 and not the 2.0.7 of Blockys Mobile. The Mobile 2.0.7 repair is Android-only code: it hooks SDL to retry the EGL load and to reuse the single window Android allows when the game falls back to OpenGL. Blockys iOS does not ship SDL, so there is nothing to port.
+            - Same launcher behavior as 1.0.3: Minecraft 26.3 and 26.4-snapshot (Java 25) launch with LWJGL 3.4.1, Java 25 is installed when a version asks for it, and the game options keep fullscreen off so the window fits the device.
             - Local (offline) accounts keep working: create a profile, install Minecraft and play without a Microsoft account.
-            - Blockys-iOS-2.0.7.ipa is unsigned and installs with TrollStore, AltStore, SideStore or StikDebug. Blockys-iOS-2.0.7-trollstore.tipa adds the TrollStore JIT entitlement.
-
+            - Blockys-iOS-1.0.4.ipa is unsigned and installs with TrollStore, AltStore, SideStore or StikDebug. Blockys-iOS-1.0.4-trollstore.tipa adds the TrollStore JIT entitlement.
             Based on Amethyst-iOS (GPL-3.0). Not affiliated with AngelAuraMC, PojavLauncher or Mojang.
         run: |
           if [ -z "$RELEASE_TAG" ]; then
@@ -121,12 +120,12 @@ jobs:
           fi
           printf '%s\n' "$RELEASE_NOTES" > release-notes.md
           if gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
-            gh release upload "$RELEASE_TAG" artifacts/Blockys-iOS-2.0.7.ipa artifacts/Blockys-iOS-2.0.7-trollstore.tipa artifacts/SHA256SUMS.txt --clobber
+            gh release upload "$RELEASE_TAG" artifacts/Blockys-iOS-1.0.4.ipa artifacts/Blockys-iOS-1.0.4-trollstore.tipa artifacts/SHA256SUMS.txt --clobber
           else
             gh release create "$RELEASE_TAG" \
-              artifacts/Blockys-iOS-2.0.7.ipa \
-              artifacts/Blockys-iOS-2.0.7-trollstore.tipa \
+              artifacts/Blockys-iOS-1.0.4.ipa \
+              artifacts/Blockys-iOS-1.0.4-trollstore.tipa \
               artifacts/SHA256SUMS.txt \
-              --title "Blockys iOS 2.0.7" \
+              --title "Blockys iOS 1.0.4" \
               --notes-file release-notes.md
           fi
